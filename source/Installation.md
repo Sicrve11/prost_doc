@@ -14,7 +14,7 @@ The entire installation process takes place in the `PROST-master` directory, so 
 
 We recommend using a conda environment to configure PROST. To create and activate the environment `PROST_ENV`, run the following command in `bash` or `Anaconda Powershell Prompt`:  
 
-    conda create -n PROST_ENV python
+    conda create -n PROST_ENV python==3.7
     conda activate PROST_ENV
 
 ## 2. Prepare `R` environment
