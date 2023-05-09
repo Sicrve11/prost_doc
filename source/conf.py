@@ -28,8 +28,8 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
 
-from recommonmark.parser import CommonMarkParser
-source_parsers = {
-'.md': CommonMarkParser,
-}
-source_suffix = ['.rst', '.md']
+# from recommonmark.parser import CommonMarkParser
+# source_parsers = {
+# '.md': CommonMarkParser,
+# }
+# source_suffix = ['.rst', '.md']
