@@ -1,1 +1,0 @@
-This is the docs of PROST, and more details please visit https://github.com/Tang-Lab-super/PROST.
