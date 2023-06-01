@@ -14,7 +14,7 @@ PI is a quantifiable index that allows spatial feature gene selection, and the r
 | ---------------------------------------------  | ------------------------------------------- |
 |  `PROST.prepare_for_PI(adata[, platform...])`  | Process the raw AnnData for PI calculation. |
 |  `PROST.cal_prost_index(adata[, platform...])` | Compute PI.                                 |
-|
+
 
 
 ### `PROST.prepare_for_PI(adata, percentage = 0.1, platform="visium")`
@@ -56,7 +56,7 @@ PNN is a neural network model that can perform unsupervised clustering of organi
 | --------------------------------------------- | -------------------------------------------- |
 | `PROST.feature_selection(adata[,by...])`      | Selection of genes of interest.              |
 | `PROST.run_prost_clust(adata[, platform...])` | Run PNN for clustering.                      |
-|
+
 
 
 ### `PROST.feature_selection(adata, by = 'manual', selected_gene_name=None, n_top_genes = 3000)`
