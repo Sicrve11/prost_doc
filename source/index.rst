@@ -27,12 +27,10 @@ Using **PROST** you can do:
    Installation
    Easy Start
    How to use PROST
-   Tutorials
+   Tutorial1 DLPFC
+   Tutorial2 Stereo-seq
+   Tutorial3 SeqFish
+   Tutorial4 osmFish
    Api
-
-
-
-
-
 
 ===================================
