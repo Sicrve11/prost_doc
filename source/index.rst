@@ -31,6 +31,9 @@ Using **PROST** you can do:
    Tutorial2 Stereo-seq
    Tutorial3 SeqFish
    Tutorial4 osmFish
+   Tutorial5 simulated osmFish
+   Tutorial6 slide-seq
+   Tutorial7 PI
    Api
 
 ===================================
