@@ -72,7 +72,6 @@ The original data can be downloaded from [google drive]().
       
 ![osmFISH_annotation](./_images/osmFISH/osmFISH_annotation.png "Plot annotation")
 
-
 --- 
 
 ## Clustering on original data
@@ -80,21 +79,10 @@ The original data can be downloaded from [google drive]().
     # Set the number of clusters
     n_clusters = 11     # same as annotation
 
-    # Dropout simulation
-    adata = sc.read(output_dir+"/used_data.h5")
-
-    dropout = 0.05 # drop out rate=0.05
-    adata = PROST.simulateH5Data(adata, rr = dropout)
-    adata.write_h5ad(output_dir + f"/used_data_drop={dropout}.h5")
-
-
-    >>> dropout rate = 0.05
-    >>> Done! Remain 105115/110647
-
-
 ### 1.Expression data preprocessing
 
     PROST.setup_seed(SEED)
+
     # Read data
     adata = sc.read(output_dir+"/used_data.h5")
 
@@ -103,23 +91,23 @@ The original data can be downloaded from [google drive]().
 
 
 ### 2.Run PROST clustering
-    PROST.run_prost_clust(adata, 
-                        platform="osmFISH", 
-                        min_distance = 800,
-                        init="mclust",
-                        n_clusters = n_clusters,                      
-                        tol = 5e-3,
-                        laplacin_filter = True,
-                        SEED=SEED,
-                        lr = 0.1,
-                        max_epochs = 100)
+
+    PROST.run_PNN(adata, 
+            platform="osmFISH", 
+            min_distance = 800,
+            init="mclust",
+            n_clusters = n_clusters,  # same as annotation
+            tol = 5e-3,
+            SEED=SEED,
+            lr = 0.1,
+            max_epochs = 100)
 
 
     >>> Calculating adjacency matrix ...
     >>> Running PCA ...
     >>> Laplacian Smoothing ...
     >>> Initializing cluster centers with mclust, n_clusters known
-    >>> Epoch: : 102it [02:34,  1.52s/it, loss=0.18372384]         
+    >>> Epoch: : 102it [02:56,  1.73s/it, loss=0.18372384]         
     >>> Clustering completed !!
 
 
@@ -161,9 +149,8 @@ The original data can be downloaded from [google drive]().
 
     adata=sc.read(output_dir + f"/PNN_result.h5")
 
-    #
     plt.rcParams["figure.figsize"] = (5,5)
-    sc.pl.embedding(adata, basis="spatial", color="pp_clustering", size     = 15, show=False, title='pp_clustering')
+    sc.pl.embedding(adata, basis="spatial", color="pp_clustering", size = 15, show=False, title='pp_clustering')
     plt.axis('off')
     plt.gca().set_aspect('equal', 'box')
     plt.savefig(output_dir + f"/pp_clustering.png", dpi=600,    bbox_inches='tight')
@@ -174,7 +161,6 @@ The original data can be downloaded from [google drive]().
 --- 
 
 ## Clustering on simulated data (drop out rate=0.05)
-
 
     # Set the number of clusters
     n_clusters = 11     # same as annotation
@@ -190,9 +176,8 @@ The original data can be downloaded from [google drive]().
 
 ### 1.Expression data preprocessing
 
+    adata = sc.read(output_dir + f"/used_data_drop={dropout}.h5")
     PROST.setup_seed(SEED)
-    # Read data
-    adata = sc.read(output_dir+"/used_data.h5")
 
     sc.pp.normalize_total(adata)
     sc.pp.log1p(adata)
@@ -200,30 +185,29 @@ The original data can be downloaded from [google drive]().
 
 ### 2.Run PROST clustering
 
-    PROST.run_prost_clust(adata, 
-                        platform="osmFISH", 
-                        min_distance = 700,
-                        init="mclust",
-                        n_clusters = 11,
-                        tol = 5e-3,
-                        laplacin_filter = True,
-                        SEED=SEED,
-                        lr = 0.1,
-                        max_epochs = 100)
+    PROST.run_PNN(adata, 
+                platform="osmFISH", 
+                min_distance = 700,
+                init="mclust",
+                n_clusters = n_clusters,
+                tol = 5e-3,
+                SEED=SEED,
+                lr = 0.1,
+                max_epochs = 100)
 
 
     >>> Calculating adjacency matrix ...
     >>> Running PCA ...
     >>> Laplacian Smoothing ...
     >>> Initializing cluster centers with mclust, n_clusters known
-    >>> Epoch: : 102it [02:47,  1.64s/it, loss=0.19401526]             
+    >>> Epoch: : 102it [02:54,  1.71s/it, loss=0.19401526]             
     >>> Clustering completed !!
 
 
 ### 3.Post-process cluster result
 
     adata = PROST.cluster_post_process(adata, 
-                                   platform='osmFISH', 
+                                   platform = 'osmFISH', 
                                    min_distance = 1000, 
                                    key_added = "pp_clustering", 
                                    run_times = 3)

@@ -108,7 +108,7 @@ The original data can be downloaded from [google drive](https://drive.google.com
 
     adata=sc.read(output_dir+"/used_data1.h5")
     adata = PROST.prepare_for_PI(adata, percentage = 0.01, platform="SeqFISH")
-    adata = PROST.cal_prost_index(adata, connect_kernel_size=8, neighbors=8,    platform="SeqFISH",del_rate=0.05)
+    adata = PROST.cal_PI(adata, kernel_size=8, platform="SeqFISH",del_rate=0.05)
 
     # Calculate spatial autocorrelation statistics and Hypothesis test
     '''
@@ -160,18 +160,17 @@ The original data can be downloaded from [google drive](https://drive.google.com
 
 
 ### 2.Run PROST clustering
-    PROST.run_prost_clust(adata, 
-                        platform="SeqFISH", 
-                        min_distance = 3,
-                        init="mclust",
-                        n_clusters = n_clusters,                      
-                        tol = 5e-3,
-                        laplacin_filter = True,
-                        lr = 0.1, 
-                        SEED=SEED,
-                        max_epochs = 500,
-                        post_processing = False,
-                        cuda = False)
+    PROST.run_PNN(adata, 
+                platform="SeqFISH", 
+                min_distance = 3,
+                init="mclust",
+                n_clusters = n_clusters,                      
+                tol = 5e-3,
+                lr = 0.1, 
+                SEED=SEED,
+                max_epochs = 500,
+                post_processing = False,
+                cuda = False)
 
 
     >>> Calculating adjacency matrix ...

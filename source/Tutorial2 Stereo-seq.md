@@ -48,7 +48,8 @@ We followed [(Kangning Dong. et al. 2022)](https://doi.org/10.1038/s41467-022-29
 ### 3.Calculate and save PI
 
     adata = PROST.prepare_for_PI(adata, percentage = 0.01, platform="stereo-seq")
-    adata = PROST.cal_prost_index(adata, connect_kernel_size=6, neighbors=8,    platform="stereo-seq")
+    adata = PROST.cal_PI(adata, kernel_size=6, platform="stereo-seq")
+
     # Calculate spatial autocorrelation statistics and Hypothesis test
     '''
     PROST.spatial_autocorrelation(adata, k = 10, permutations = None)
@@ -93,7 +94,7 @@ We followed [(Kangning Dong. et al. 2022)](https://doi.org/10.1038/s41467-022-29
 
     sc.pp.normalize_total(adata)
     sc.pp.log1p(adata)
-    adata = PROST.feature_selection(adata, save_path = output_dir, by = "prost",    n_top_genes = 3000)
+    adata = PROST.feature_selection(adata, by = "prost",    n_top_genes = 3000)
 
     adata
 
@@ -105,17 +106,16 @@ We followed [(Kangning Dong. et al. 2022)](https://doi.org/10.1038/s41467-022-29
 
 
 ### 2.Run PROST clustering
-    PROST.run_prost_clust(adata, 
-                        platform="stereo-seq", 
-                        min_distance = 50,
-                        init="mclust",
-                        n_clusters = n_clusters,                     
-                        tol = 5e-3,
-                        laplacin_filter = True,
-                        SEED=SEED,
-                        max_epochs = 500,
-                        post_processing = False,
-                        cuda = False)
+    PROST.run_PNN(adata, 
+                platform="stereo-seq", 
+                min_distance = 50,
+                init="mclust",
+                n_clusters = n_clusters,                     
+                tol = 5e-3,
+                SEED=SEED,
+                max_epochs = 500,
+                post_processing = False,
+                cuda = False)
     
 
     >>> Calculating adjacency matrix ...

@@ -24,7 +24,7 @@ The original data and manual annotation are prepared and aviliable at [google dr
 ### 2.Set up the working environment and import data 
 
     # the location of R (used for the mclust clustering)
-    ENVpath = r"C:\Users\PC\miniconda3\envs\PROST_ENV"            # refer to 'How to use    PROST' section
+    ENVpath = "your path of PROST_ENV"      # refer to 'How to use PROST' section
     os.environ['R_HOME'] = f'{ENVpath}/lib/R'
     os.environ['R_USER'] = f'{ENVpath}/lib/python3.7/site-packages/rpy2'
     
@@ -35,7 +35,7 @@ The original data and manual annotation are prepared and aviliable at [google dr
     #%% Read in data
     section_num = 151672
     
-    # Set directory (If you want to use additional data, please     change the file path)
+    # Set directory (If you want to use additional data, please change the file path)
     rootdir = 'datasets/DLPFC'
     
     input_dir = os.path.join(f'{rootdir}', str(section_num))
@@ -50,14 +50,13 @@ The original data and manual annotation are prepared and aviliable at [google dr
 
 
     >>> Variable names are not unique. To make them unique, call `.var_names_make_unique`.
-    >>> Variable names are not unique. To make them unique, call `.var_names_make_unique`.
 
 
 ### 3.Calculate and save PI
 
     # Calculate PI
     adata = PROST.prepare_for_PI(adata, platform="visium") 
-    adata = PROST.cal_prost_index(adata, platform="visium")
+    adata = PROST.cal_PI(adata, platform="visium")
 
     # Calculate spatial autocorrelation statistics and do hypothesis test
     '''
@@ -91,13 +90,12 @@ The original data and manual annotation are prepared and aviliable at [google dr
     PROST.plot_gene(adata, platform="visium",size = 2, sorted_by = "PI", top_n = 25,save_path = output_dir)
 
 
-    ... storing 'feature_types' as categorical
-    ... storing 'genome' as categorical
+    >>> ... storing 'feature_types' as categorical
+    >>> ... storing 'genome' as categorical
+    >>> Drawing pictures:
+    >>> 100%|██████████| 1/1 [00:09<00:00,  9.55s/it]
+    >>> Drawing completed !!
 
-    Drawing pictures:
-    100%|██████████| 1/1 [00:09<00:00,  9.55s/it]
-
-    Drawing completed !!
 ![DLPFC_pi_output](./_images/DLPFC/DLPFC_pi_output.png "Draw SVGs detected by PI")
 
 
@@ -112,24 +110,23 @@ The original data and manual annotation are prepared and aviliable at [google dr
 
     sc.pp.normalize_total(adata)
     sc.pp.log1p(adata)
-    adata = PROST.feature_selection(adata, save_path = output_dir, by = "prost", n_top_genes = 3000)
+    adata = PROST.feature_selection(adata, by = "prost", n_top_genes = 3000)
 
 
 ### 2.Run PROST clustering
-    PROST.run_prost_clust(adata,
-                        platform="visium",
-                        key_added = "PROST",
-                        init="mclust",                         
-                        n_clusters = n_clusters,                        
-                        gnnlayers = 2,              
-                        laplacin_filter = True,                        
-                        lr = 0.1,                         
-                        SEED=SEED,                          
-                        max_epochs = 500,                        
-                        tol = 5e-3,                        
-                        post_processing = True,                        
-                        pp_run_times = 3,
-                        cuda = False)
+    PROST.run_PNN(adata,
+                platform="visium",
+                key_added = "PROST",
+                init="mclust",                         
+                n_clusters = n_clusters,                        
+                lap_filter = 2,                                  
+                lr = 0.1,                         
+                SEED=SEED,                          
+                max_epochs = 500,                        
+                tol = 5e-3,                        
+                post_processing = True,                        
+                pp_run_times = 3,
+                cuda = False)
 
 
     >>> Calculating adjacency matrix ...
@@ -162,15 +159,16 @@ The original data and manual annotation are prepared and aviliable at [google dr
     # Plot clustering results
     plt.rcParams["figure.figsize"] = (4,4)
     sc.pl.spatial(adata, 
-                    img_key = "hires", 
-                    color = ["annotation","clustering","pp_clustering"],
-                    title = ["Manual annotation",'clustering','post-processed clustering'],                
-                    na_in_legend = False,
-                    ncols = 3,
-                    size = 1)
+                img_key = "hires", 
+                color = ["annotation","clustering","pp_clustering"],
+                title = ["Manual annotation",'clustering','post-processedclustering'],                
+                na_in_legend = False,
+                ncols = 3,
+                size = 1)
 
     
     >>> storing 'annotation' as categorical
+    
 ![clustering results](./_images/DLPFC/DLPFC_clusterresult_output.png "clustering results")
 
 
