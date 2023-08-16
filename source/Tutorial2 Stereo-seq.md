@@ -1,6 +1,6 @@
 # Tutorial 2: Application on Stereo-seq mouse olfactory bulb dataset.
 In this vignette, we analysis the [Stereo-seq](https://doi.org/10.1016/j.cell.2022.04.003) mouse olfactory bulb dataset (~14 μm in diameter per spot) from [(Huazhu Fu. et al. 2021)](https://doi.org/10.1101/2021.06.15.448542) to evaluate the performance of PROST on ST datasets with single-cell resolution.  
-We followed [(Kangning Dong. et al. 2022)](https://doi.org/10.1038/s41467-022-29439-6) to remove the spots outside the tissue section. The processed data can be downloaded from [google drive](https://drive.google.com/drive/folders/1lcGdArvtBcXkA0vE-v2GyQgeBrlZUpto?usp=share_link).  
+We followed [(Kangning Dong. et al. 2022)](https://doi.org/10.1038/s41467-022-29439-6) to remove the spots outside the tissue section. The [processed data](https://github.com/JinmiaoChenLab/SEDR/) can be downloaded from [google drive](https://drive.google.com/drive/folders/1lcGdArvtBcXkA0vE-v2GyQgeBrlZUpto?usp=share_link).  
 
 
 ## Identify SVGs
