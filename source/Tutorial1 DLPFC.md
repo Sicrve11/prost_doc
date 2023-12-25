@@ -136,8 +136,18 @@ The [original data](https://support.10xgenomics.com/spatial-gene-expression/data
     >>> Clustering completed !!
     >>> Post-processing for clustering result ...
     >>> Refining clusters, run times: 1/3
-    >>> Refining clusters, run times: 2/3
-    >>> Refining clusters, run times: 3/3
+    >>> Refining clusters, run times: 2/3 
+    >>> Refining clusters, run times: 3/3 
+
+
+### 3.Save result
+    adata.write_h5ad(output_dir+"/PNN_result.h5")   
+    clustering = adata.obs["clustering"]
+    clustering.to_csv(output_dir+"/clusters.csv",header = False)
+    pp_clustering = adata.obs["pp_clustering"] 
+    pp_clustering.to_csv(output_dir+"/pp_clusters.csv",header = False)
+    embedding = adata.obsm["PROST"]
+    np.savetxt(output_dir+"/embedding.txt",embedding) 
 
 
 ### 4.Plot clustering results 
