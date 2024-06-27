@@ -109,7 +109,7 @@ The [original data](https://singlecell.broadinstitute.org/single_cell/study/SCP7
 
 ### 2.Run PROST clustering
     PROST.run_PNN(adata, 
-            platform="slide-seq", 
+            adj_mode = "distance",
             min_distance = 80,
             init="mclust",
             n_clusters = n_clusters,                   
