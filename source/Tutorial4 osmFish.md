@@ -93,7 +93,7 @@ The [original data](http://linnarssonlab.org/osmFISH) can be downloaded from [go
 ### 2.Run PROST clustering
 
     PROST.run_PNN(adata, 
-            platform="osmFISH", 
+            adj_mode = "distance", 
             min_distance = 800,
             init="mclust",
             n_clusters = n_clusters,  # same as annotation
@@ -186,7 +186,7 @@ The [original data](http://linnarssonlab.org/osmFISH) can be downloaded from [go
 ### 2.Run PROST clustering
 
     PROST.run_PNN(adata, 
-                platform="osmFISH", 
+                adj_mode = "distance", 
                 min_distance = 700,
                 init="mclust",
                 n_clusters = n_clusters,
