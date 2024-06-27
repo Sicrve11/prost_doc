@@ -126,7 +126,7 @@ The [original data](https://marionilab.cruk.cam.ac.uk/SpatialMouseAtlas/) can be
 
 ### 2.Run PROST clustering
     PROST.run_PNN(adata, 
-            platform="SeqFISH", 
+            adj_mode = "distance", 
             min_distance = 3,
             init="mclust",
             n_clusters = n_clusters, 
