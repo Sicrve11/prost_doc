@@ -107,7 +107,7 @@ We followed [(Kangning Dong. et al. 2022)](https://doi.org/10.1038/s41467-022-29
 
 ### 2.Run PROST clustering
     PROST.run_PNN(adata, 
-                platform="stereo-seq", 
+                adj_mode = "distance",
                 min_distance = 50,
                 init="mclust",
                 n_clusters = n_clusters,                     
