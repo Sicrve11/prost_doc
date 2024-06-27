@@ -110,7 +110,7 @@ The [original data](https://github.com/acheng416/Benchmark-CTCM-ST) can be downl
 ### 2.Run PROST clustering
     
     PROST.run_PNN(adata, 
-            platform="osmFISH", 
+            adj_mode = "distance", 
             min_distance = 275,
             init="mclust",
             n_clusters = n_clusters,
