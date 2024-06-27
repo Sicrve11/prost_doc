@@ -114,10 +114,11 @@ The [original data](https://support.10xgenomics.com/spatial-gene-expression/data
 
 ### 2.Run PROST clustering
     PROST.run_PNN(adata,
-                platform="visium",
                 key_added = "PROST",
                 init="mclust",                         
-                n_clusters = n_clusters,                        
+                n_clusters = n_clusters,  
+                adj_mode = "neighbour",
+                k_neighbors = 7, 
                 lap_filter = 2,                                  
                 lr = 0.1,                         
                 SEED=SEED,                          
