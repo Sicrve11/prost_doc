@@ -273,7 +273,7 @@ Use PNN to identify spatial domains for ST data.
 - **n_clusters : int (default: 5)**:  
     If the number of spatial domains is know, set cluster numbers for `init='kmeans'` or `init='mclust'`.
 - **res : float (default: 0.5)**:  
-    If the number of spatial domains is unknown, set resolutions parameter for `init='kmeans'` or `init='mclust'`.
+    If the number of spatial domains is unknown, set resolutions parameter for `init='louvain'` or `init='leiden'`.
 - **k_neighbors : int (default: 7)**:  
     For `mode = 'neighbour'`, set the number of nearest neighbors if `mode='neighbour'`.
 - **min_distance : int (default: 50)**:  
